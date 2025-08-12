@@ -25,3 +25,9 @@ def test_pipeline_extracts_text(tmp_path: Path):
     data = json.loads(result)
     combined = json.dumps(data)
     assert "Hello World" in combined
+
+
+def test_pipeline_txt_format(tmp_path: Path):
+    pdf_path = _create_sample_pdf(tmp_path / "sample.pdf")
+    result = run_pipeline(str(pdf_path), lang="eng", fmt="txt")
+    assert "Hello World" in result

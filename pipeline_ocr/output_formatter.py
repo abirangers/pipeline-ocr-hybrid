@@ -8,8 +8,14 @@ def format_output(pages_data: List[Dict], fmt: str = "json") -> str:
 
     Args:
         pages_data: List containing layout information for each page.
-        fmt: Output format, currently only ``json`` is supported.
+        fmt: Output format. Supports ``json`` and ``txt``.
     """
-    if fmt != "json":
-        raise ValueError(f"Unsupported format: {fmt}")
-    return json.dumps(pages_data, ensure_ascii=False, indent=2)
+    if fmt == "json":
+        return json.dumps(pages_data, ensure_ascii=False, indent=2)
+    if fmt == "txt":
+        pages = []
+        for page in pages_data:
+            lines = page.get("lines", [])
+            pages.append("\n".join(lines))
+        return "\n\n".join(pages)
+    raise ValueError(f"Unsupported format: {fmt}")

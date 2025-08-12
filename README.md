@@ -15,7 +15,7 @@ grafik, dan cap/stempel dapat dipisahkan ke dalam struktur data yang rapi.
 4. **Analisis Layout** – Item teks dikelompokkan untuk mencerminkan susunan
    baris atau blok pada halaman.
 5. **Output Terstruktur** – Hasil akhir disimpan dalam format terstruktur
-   seperti JSON sehingga mudah diolah kembali.
+   seperti JSON atau teks biasa (TXT) sehingga mudah diolah kembali.
 
 Walaupun implementasinya sederhana, alur kerja di atas menunjukkan bagaimana
 pipeline OCR dapat dibangun dan dikembangkan lebih lanjut sesuai kebutuhan.
@@ -29,7 +29,7 @@ pipeline OCR dapat dibangun dan dikembangkan lebih lanjut sesuai kebutuhan.
   dan gambar.
 - **Cepat & Efisien** – Dapat memproses banyak halaman dalam hitungan menit
   setelah model siap.
-- **Fleksibel** – Output mudah disesuaikan (JSON, Markdown, dll.)
+- **Fleksibel** – Output mudah disesuaikan (JSON, TXT, Markdown, dll.)
 
 ## Contoh Penggunaan
 
@@ -60,7 +60,11 @@ apt-get update && apt-get install -y poppler-utils tesseract-ocr
 Run the command line interface to process a PDF and write the output to a file:
 
 ```
+# JSON output
 python -m pipeline_ocr.main --input input.pdf --output result.json
+
+# Plain text output
+python -m pipeline_ocr.main --input input.pdf --output result.txt --format txt
 ```
 
 ## Testing

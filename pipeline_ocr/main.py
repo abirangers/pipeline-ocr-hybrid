@@ -16,7 +16,7 @@ def run_pipeline(input_pdf: str, lang: str = "eng+ind", fmt: str = "json") -> st
         input_pdf: Path to the PDF file to process.
         lang: Language codes for Tesseract OCR. Defaults to ``"eng+ind"``
             to recognise both English and Indonesian text.
-        fmt: Output format. ``"json"`` by default.
+        fmt: Output format. ``"json"`` or ``"txt"``.
     """
     images = convert_pdf_to_images(input_pdf)
     pages: List[Dict] = []
@@ -36,7 +36,11 @@ def main() -> None:
         default="eng+ind",
         help="Tesseract language codes (e.g. 'eng+ind' for English+Indonesian)",
     )
-    parser.add_argument("--format", default="json", help="Output format")
+    parser.add_argument(
+        "--format",
+        default="json",
+        help="Output format (json or txt)",
+    )
     args = parser.parse_args()
 
     result = run_pipeline(args.input, lang=args.lang, fmt=args.format)
